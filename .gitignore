@@ -5,6 +5,8 @@
 __pycache__
 db.sqlite3
 media
+event_planner/static
+migrations/
 
 # Backup files #
 *.bak

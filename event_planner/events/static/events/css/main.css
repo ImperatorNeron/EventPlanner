@@ -1,3 +1,9 @@
-h1{
-    color: red;
+html {
+  height: 100%;
+}
+
+body {
+    background: rgb(145,234,228);
+    background: linear-gradient(38deg, rgba(145,234,228,1) 7%, rgba(134,168,231,1) 51%, rgba(127,127,213,1) 90%);
+    height: 100hv;
 }
