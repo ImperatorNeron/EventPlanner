@@ -10,17 +10,22 @@
     <title>Document</title>
 </head>
 <body>
-<div class="header">
-    <div class="logo">Назва сайту</div>
-    <div class="nav-container">
-        <a href="#">Усі події</a>
-        <a href="#">Контакти</a>
-        <a href="#">Про проєкт</a>
-        <a href="#">Увійти</a>
+<div class="container">
+    <div class="header">
+        <div class="logo">Назва сайту</div>
+        <div class="nav-container">
+            <a href="#">Усі події</a>
+            <a href="#">Контакти</a>
+            <a href="#">Про проєкт</a>
+            <a class="login" href="#">Увійти</a>
+        </div>
     </div>
+    <footer>
+        <p>&copy; 2023 Назва компанії. Усі права захищені.</p>
+    </footer>
 </div>
-<footer>
-    <p>&copy; 2023 Назва компанії. Усі права захищені.</p>
-</footer>
+<div class="reg-block"></div>
+<div class="reg-form"></div>
+<script src="{% static 'events/js/registration.js' %}"></script>
 </body>
 </html>

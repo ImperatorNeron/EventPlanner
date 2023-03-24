@@ -8,3 +8,4 @@ class Categories(models.Model):
         verbose_name = "Категорію"
         verbose_name_plural = "Категорії"
         ordering = ["name"]
+
