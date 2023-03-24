@@ -18,14 +18,34 @@
             <a href="#">Контакти</a>
             <a href="#">Про проєкт</a>
             <a class="login" href="#">Увійти</a>
+            <a class="register" href="#">Зареєструватися</a>
         </div>
     </div>
     <footer>
         <p>&copy; 2023 Назва компанії. Усі права захищені.</p>
     </footer>
 </div>
-<div class="reg-block"></div>
-<div class="reg-form"></div>
+<div class="reg-block">
+    {% if register_form %}
+    <form method="post">
+        {% csrf_token %}
+        {{ register_form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    {% endif %}
+</div>
+
+<div class="login-block">
+    {% if login_form %}
+    <form method="post">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    {% endif %}
+</div>
+
+<div class="block"></div>
 <script src="{% static 'events/js/registration.js' %}"></script>
 </body>
 </html>

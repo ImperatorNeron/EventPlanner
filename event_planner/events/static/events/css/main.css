@@ -8,7 +8,7 @@ body {
   height: 100hv;
 }
 
-.reg-form {
+.block {
   display: none;
   width: 100%;
   height: 100%;
@@ -21,7 +21,7 @@ body {
   opacity: 0;
 }
 
-.reg-block {
+.reg-block, .login-block{
   display: none;
   width: 640px;
   height: 350px;
