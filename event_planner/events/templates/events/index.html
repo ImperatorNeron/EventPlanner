@@ -19,6 +19,7 @@
             <a href="#">Про проєкт</a>
             <a class="login" href="#">Увійти</a>
             <a class="register" href="#">Зареєструватися</a>
+            <div class="try">{{ request.user }}</div>
         </div>
     </div>
     <footer>
@@ -26,21 +27,70 @@
     </footer>
 </div>
 <div class="reg-block">
-    {% if register_form %}
-    <form method="post">
+    <div class="reg-head">
+        <h2 class="reg-title"><span>Реєстрація</span></h2>
+        <button class="close-btn">&times;</button>
+    </div>
+    <hr class="reg-divider">
+    <form class="reg-form" method="post">
         {% csrf_token %}
-        {{ register_form.as_p }}
-        <button type="submit">Register</button>
+        <div class="form-group">
+            <label class="form-label" for="{{ register_form.username.id_for_label }}">Ім'я користувача</label>
+            {{ register_form.username }}
+            {% if register_form.errors %}
+            {{ register_form.username.errors }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ register_form.email.id_for_label }}">Електронна пошта</label>
+            {{ register_form.email }}
+            {% if register_form.errors %}
+            {{ register_form.email.errors }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ register_form.password1.id_for_label }}">Пароль</label>
+            {{ register_form.password1 }}
+            {% if register_form.errors %}
+            {{ register_form.password1.errors }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ register_form.password2.id_for_label }}">Підтвердити пароль</label>
+            {{ register_form.password2 }}
+            {% if register_form.errors %}
+            {{ register_form.password2.errors }}
+            {% endif %}
+        </div>
+        <button type="submit" class="form-btn">Зареєструватися</button>
     </form>
-    {% endif %}
 </div>
 
+
 <div class="login-block">
+    <div class="reg-head">
+        <h2 class="reg-title"><span>Увійти</span></h2>
+        <button class="close-btn">&times;</button>
+    </div>
+    <hr class="reg-divider">
     {% if login_form %}
-    <form method="post">
+    <form method="post" class="reg-form">
         {% csrf_token %}
-        {{ login_form.as_p }}
-        <button type="submit">Login</button>
+        <div class="form-group">
+            <label class="form-label" for="{{ login_form.username.id_for_label }}">Ім'я користувача</label>
+            {{ login_form.username }}
+            {% if login_form.errors %}
+            {{ login_form.username.errors }}
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="{{ login_form.password1.id_for_label }}">Пароль</label>
+            {{ login_form.password }}
+            {% if login_form.errors %}
+            {{ login_form.password.errors }}
+            {% endif %}
+        </div>
+        <button type="submit" class="form-btn">Login</button>
     </form>
     {% endif %}
 </div>
