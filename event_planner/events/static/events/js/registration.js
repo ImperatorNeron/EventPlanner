@@ -1,35 +1,44 @@
+// Усі кнопки
 const loginButton = document.querySelector('.login');
 const regButton = document.querySelector('.register');
 const closeButton = document.querySelectorAll('.close-btn');
 const submitButton = document.querySelector('.form-btn');
 
-regButton.addEventListener('click', function () {
+/* Додати затемнення */
+
+function get_blocks(){
     const block = document.querySelector('.block');
     const container = document.querySelector('.container');
     const reg_block = document.querySelector('.reg-block');
-    block.style.display = 'block';
-    container.style.filter = 'blur(5px)';
-    reg_block.style.display = 'block';
+    const log_block = document.querySelector('.login-block');
+    return [block, container, reg_block, log_block]
+}
+
+function display(){
+    const arr = get_blocks()
+    arr[0].style.display = 'block';
+    arr[0].style.backgroundColor  = 'black';
+    arr[0].style.opacity = 0.3;
+    arr[1].style.filter = 'blur(1px)';
+    return arr
+}
+
+regButton.addEventListener('click', function () {
+    const arr = display()
+    arr[2].style.display = 'block';
 });
 
 loginButton.addEventListener('click', function () {
-    const block = document.querySelector('.block');
-    const container = document.querySelector('.container');
-    const log_block = document.querySelector('.login-block');
-    block.style.display = 'block';
-    container.style.filter = 'blur(5px)';
-    log_block.style.display = 'block';
+    const arr = display()
+    arr[3].style.display = 'block';
 });
 
 function close() {
-    const block = document.querySelector('.block');
-    const container = document.querySelector('.container');
-    const reg_block = document.querySelector('.reg-block');
-    const log_block = document.querySelector('.login-block');
-    block.style.display = 'none';
-    container.style.filter = 'none';
-    reg_block.style.display = 'none';
-    log_block.style.display = 'none';
+    const arr = get_blocks()
+    arr[0].style.display = 'none';
+    arr[1].style.filter = 'none';
+    arr[2].style.display = 'none';
+    arr[3].style.display = 'none';
 }
 
 

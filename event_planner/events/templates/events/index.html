@@ -1,101 +1,33 @@
-<!doctype html>
+{% extends "base.html" %}
 {% load static %}
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'events/css/main.css' %}">
-    <title>Document</title>
-</head>
-<body>
+
+{% block css_styles %}
+<link rel="stylesheet" href="{% static 'events/css/main.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>Головна сторінка</title>
+{% endblock %}
+
+{% block container %}
 <div class="container">
-    <div class="header">
-        <div class="logo">Назва сайту</div>
-        <div class="nav-container">
-            <a href="#">Усі події</a>
-            <a href="#">Контакти</a>
-            <a href="#">Про проєкт</a>
-            <a class="login" href="#">Увійти</a>
-            <a class="register" href="#">Зареєструватися</a>
-            <div class="try">{{ request.user }}</div>
-        </div>
-    </div>
+    {% include "include/_header.html" %}
+    <main>
+        <div class="try">{{ request.user }}</div>
+    </main>
     <footer>
         <p>&copy; 2023 Назва компанії. Усі права захищені.</p>
     </footer>
 </div>
-<div class="reg-block">
-    <div class="reg-head">
-        <h2 class="reg-title"><span>Реєстрація</span></h2>
-        <button class="close-btn">&times;</button>
-    </div>
-    <hr class="reg-divider">
-    <form class="reg-form" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <label class="form-label" for="{{ register_form.username.id_for_label }}">Ім'я користувача</label>
-            {{ register_form.username }}
-            {% if register_form.errors %}
-            {{ register_form.username.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <label class="form-label" for="{{ register_form.email.id_for_label }}">Електронна пошта</label>
-            {{ register_form.email }}
-            {% if register_form.errors %}
-            {{ register_form.email.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <label class="form-label" for="{{ register_form.password1.id_for_label }}">Пароль</label>
-            {{ register_form.password1 }}
-            {% if register_form.errors %}
-            {{ register_form.password1.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <label class="form-label" for="{{ register_form.password2.id_for_label }}">Підтвердити пароль</label>
-            {{ register_form.password2 }}
-            {% if register_form.errors %}
-            {{ register_form.password2.errors }}
-            {% endif %}
-        </div>
-        <button type="submit" class="form-btn">Зареєструватися</button>
-    </form>
-</div>
-
-
-<div class="login-block">
-    <div class="reg-head">
-        <h2 class="reg-title"><span>Увійти</span></h2>
-        <button class="close-btn">&times;</button>
-    </div>
-    <hr class="reg-divider">
-    {% if login_form %}
-    <form method="post" class="reg-form">
-        {% csrf_token %}
-        <div class="form-group">
-            <label class="form-label" for="{{ login_form.username.id_for_label }}">Ім'я користувача</label>
-            {{ login_form.username }}
-            {% if login_form.errors %}
-            {{ login_form.username.errors }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            <label class="form-label" for="{{ login_form.password1.id_for_label }}">Пароль</label>
-            {{ login_form.password }}
-            {% if login_form.errors %}
-            {{ login_form.password.errors }}
-            {% endif %}
-        </div>
-        <button type="submit" class="form-btn">Login</button>
-    </form>
-    {% endif %}
-</div>
-
+{% if not request.user.is_authenticated %}
+{% include "include/_login_form.html" %}
+{% include "include/_register_form.html" %}
 <div class="block"></div>
+{% endif %}
+{% endblock %}
+
+{% block js_scripts %}
+{% if not request.user.is_authenticated %}
 <script src="{% static 'events/js/registration.js' %}"></script>
-</body>
-</html>
+{% endif %}
+{% endblock %}
