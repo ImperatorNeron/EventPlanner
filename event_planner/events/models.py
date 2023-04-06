@@ -18,5 +18,6 @@ class ContactUs(models.Model):
 
     class Meta:
         verbose_name = "Повідомлення"
+        verbose_name_plural = "Повідомлення"
         ordering = ["sending_datetime"]
 

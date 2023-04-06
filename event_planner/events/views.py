@@ -33,3 +33,8 @@ class LogInView(LoginView):
 class ContactUsView(FormView):
     template_name = "events/contact_us.html"
     form_class = ContactUsForm
+    success_url = reverse_lazy("index")
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

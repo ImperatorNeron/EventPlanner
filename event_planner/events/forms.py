@@ -20,10 +20,10 @@ class RegisterForm(UserCreationForm):
 class ContactUsForm(forms.ModelForm):
     class Meta:
         model = ContactUs
-        fields = ("email", "topic", "text",)
+        fields = ("email", "topic", "text")
 
         widgets = {
-            "email": forms.EmailInput(attrs={"class": "field"}),
-            "topic": forms.TextInput(attrs={"class": "field"}),
-            "text": forms.Textarea(attrs={"class": "field text-field"}),
+            "email": forms.EmailInput(attrs={"class": "field", "placeholder": "Email"}),
+            "topic": forms.TextInput(attrs={"class": "field", "placeholder": "Тема"}),
+            "text": forms.Textarea(attrs={"class": "field text-field", "placeholder": "Повідомлення"}),
         }

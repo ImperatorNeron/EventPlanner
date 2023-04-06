@@ -3,6 +3,7 @@
 
 {% block css_styles %}
 <link rel="stylesheet" href="{% static 'events/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'events/css/style.css' %}">
 {% endblock %}
 
 {% block title %}
@@ -12,5 +13,18 @@
 {% block container %}
 <div class="container">
     {% include "include/_header.html" %}
+    <div class="contact-box">
+        <div class="left"></div>
+        {% if form %}
+        <form method="post" class="right">
+            {% csrf_token %}
+            <h2>Напишіть нам</h2>
+            {{ form.email }}
+            {{ form.topic }}
+            {{ form.text }}
+            <button type="submit" class="btn">Відправити</button>
+        </form>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
