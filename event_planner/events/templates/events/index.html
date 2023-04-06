@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block title %}
-<title>Головна сторінка</title>
+Головна сторінка
 {% endblock %}
 
 {% block container %}
@@ -19,15 +19,4 @@
         <p>&copy; 2023 Назва компанії. Усі права захищені.</p>
     </footer>
 </div>
-{% if not request.user.is_authenticated %}
-{% include "include/_login_form.html" %}
-{% include "include/_register_form.html" %}
-<div class="block"></div>
-{% endif %}
-{% endblock %}
-
-{% block js_scripts %}
-{% if not request.user.is_authenticated %}
-<script src="{% static 'events/js/registration.js' %}"></script>
-{% endif %}
 {% endblock %}

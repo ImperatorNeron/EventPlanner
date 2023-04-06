@@ -1,40 +1,33 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
-from django.views import View
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.views.generic import FormView
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import login
+from django.urls import reverse_lazy
+from django.views.generic import FormView, TemplateView
 
 from .forms import RegisterForm, ContactUsForm
 
 
-class RegisterLoginView(View):
-    def get(self, request):
-        register_form = RegisterForm()
-        login_form = AuthenticationForm()
-        return render(request, 'events/index.html', {'register_form': register_form, 'login_form': login_form})
+class Index(TemplateView):
+    template_name = "events/index.html"
 
-    def post(self, request):
-        register_form = RegisterForm(request.POST)
-        login_form = AuthenticationForm(request, data=request.POST)
 
-        if register_form.is_valid():
-            user = register_form.save()
-            email = register_form.cleaned_data.get('email')
-            raw_password = register_form.cleaned_data.get('password1')
-            user = authenticate(email=email, password=raw_password)
-            login(request, user)
-            return redirect('index')
+class RegistrationView(FormView):
+    form_class = RegisterForm
+    template_name = "events/registration.html"
+    success_url = reverse_lazy("index")
 
-        elif login_form.is_valid():
-            username = login_form.cleaned_data.get('username')
-            password = login_form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)
+    def form_valid(self, form):
+        user = form.save()
+        if user is not None:
+            login(self.request, user)
+        return super(RegistrationView, self).form_valid(form)
 
-            if user is not None:
-                login(request, user)
-                return redirect('index')
 
-        return render(request, 'events/index.html', {'register_form': register_form, 'login_form': login_form})
+class LogInView(LoginView):
+    fields = "__all__"
+    template_name = "events/login.html"
+
+    def get_success_url(self):
+        return reverse_lazy("index")
 
 
 class ContactUsView(FormView):

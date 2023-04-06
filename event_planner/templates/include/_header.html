@@ -8,8 +8,8 @@
             <a href="{% url 'logout' %}">Вийти</a>
             <a class="event" href="#">Додати подію</a>
             {% else %}
-            <a class="login" href="#">Увійти</a>
-            <a class="register" href="#">Зареєструватися</a>
+            <a class="login" href="{% url 'login' %}">Увійти</a>
+            <a class="register" href="{% url 'registration' %}">Зареєструватися</a>
             {% endif %}
         </nav>
     </header>
