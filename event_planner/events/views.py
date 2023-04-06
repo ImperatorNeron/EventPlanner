@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.views.generic import FormView
 
-from .forms import RegisterForm
+from .forms import RegisterForm, ContactUsForm
 
 
 class RegisterLoginView(View):
@@ -34,3 +35,8 @@ class RegisterLoginView(View):
                 return redirect('index')
 
         return render(request, 'events/index.html', {'register_form': register_form, 'login_form': login_form})
+
+
+class ContactUsView(FormView):
+    template_name = "events/contact_us.html"
+    form_class = ContactUsForm

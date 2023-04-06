@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_styles %}
+<link rel="stylesheet" href="{% static 'events/css/main.css' %}">
+{% endblock %}
+
+{% block title %}
+<title>Контакти</title>
+{% endblock %}
+
+{% block container %}
+<div class="container">
+    {% include "include/_header.html" %}
+</div>
+{% if not request.user.is_authenticated %}
+{% include "include/_login_form.html" %}
+{% include "include/_register_form.html" %}
+<div class="block"></div>
+{% endif %}
+{% endblock %}
+
+{% block js_scripts %}
+{% if not request.user.is_authenticated %}
+<script src="{% static 'events/js/registration.js' %}"></script>
+{% endif %}
+{% endblock %}
